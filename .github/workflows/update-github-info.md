@@ -19,6 +19,7 @@ tools:
     toolsets: [repos, pull_requests]
   edit:
   web-fetch:
+  bash: [curl]
 network:
   allowed:
     - github.blog
@@ -37,11 +38,15 @@ safe-outputs:
 
 Read `notes/mona-notes.md` and `site/content/github-info.md` before making changes.
 Use GitHub repository API tools to read repository guidance and reference files,
-not terminal, CLI, or sandboxed commands.
+not terminal, CLI, or sandboxed commands for repository access.
 
 Use web-fetch to retrieve both official sources:
 - GitHub Blog: https://github.blog/latest/
 - GitHub Changelog: https://github.blog/changelog/
+
+If web-fetch is unavailable, use `curl --fail --silent --show-error --location
+--max-time 30` to retrieve those two URLs. Do not use shell commands for other
+purposes.
 
 Compare recent entries from the past seven days with the existing content.
 Select only relevant, verified updates that help developers learn GitHub faster.
