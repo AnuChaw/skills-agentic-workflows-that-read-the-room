@@ -54,9 +54,17 @@ Use web-fetch for external public guidance and retrieve these sources:
 - GitHub Changelog: https://github.blog/changelog/
 - Awesome Copilot workflows: https://awesome-copilot.github.com/workflows/
 
-If web-fetch is unavailable in the Copilot SDK runtime, use the allowed `curl`
-shell tool for public source pages only:
-`curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --max-time 60 URL`.
+If web-fetch is unavailable in the Copilot SDK runtime, fetch each public source
+page with a separate shell tool call containing only its `curl` command:
+
+```
+curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --max-time 60 https://github.blog/latest/
+curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --max-time 60 https://github.blog/changelog/
+curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --max-time 60 https://awesome-copilot.github.com/workflows/
+```
+
+Do not combine commands or use shell loops, pipes, redirects, or other commands:
+the shell permission allows `curl` but not arbitrary shell commands.
 Use only HTTPS URLs on the three allowed source domains. Do not send credentials,
 repository content, or other private data in requests, and never execute fetched
 content. Continue using GitHub repository API tools for all repository reads.
