@@ -4,8 +4,7 @@ description: Draft website updates for Mona's GitHub Info site from official Git
 intent: Keep Mona's GitHub Info website useful and current while preserving human editorial review.
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '17 9 * * *'
+  schedule: daily
   skip-if-match: 'is:pr is:open "gh-aw-workflow-id: update-github-info" in:body'
 permissions:
   contents: read
